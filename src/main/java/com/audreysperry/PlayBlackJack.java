@@ -12,14 +12,16 @@ public class PlayBlackJack {
 
         System.out.println("Let's play Black Jack");
 
-        for (int i = 0; i < player.getPlayerCards().size(); i++) {
-            System.out.println("Card: "  + player.getPlayerCards().get(i).getRankName() + " of " + player.getPlayerCards().get(i).getSuit());
+        player.showPlayerCards();
 
-        }
+//        for (int i = 0; i < player.getPlayerCards().size(); i++) {
+//            System.out.println("Card: "  + player.getPlayerCards().get(i).getRankName() + " of " + player.getPlayerCards().get(i).getSuit());
+//
+//        }
         System.out.println("Your hand totals " + player.getPlayerHandTotal());
         System.out.println("The dealers visible card is: " + dealer.getDealerCards().get(0).getRankName() + " of " + dealer.getDealerCards().get(0).getSuit());
 
-//    
+//
         System.out.println("Would you like to hit or stand?");
         String userHitOrStand = scanner.nextLine();
 

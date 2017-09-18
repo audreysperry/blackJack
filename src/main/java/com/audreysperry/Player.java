@@ -41,6 +41,12 @@ public class Player {
         this.playerCards = playerCards;
     }
 
+    public void showPlayerCards() {
+        for (int i = 0; i < playerCards.size(); i++) {
+            System.out.println("Card: "  + playerCards.get(i).getRankName() + " of " + playerCards.get(i).getSuit());
+
+        }
+    }
 
 
 }
