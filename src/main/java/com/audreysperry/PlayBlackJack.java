@@ -6,36 +6,20 @@ import java.util.Scanner;
 public class PlayBlackJack {
     public static void main(String[] args) {
         Deck blackJackDeck = new Deck();
-        Player player = new Player();
-        Dealer dealer = new Dealer();
+        Player player = new Player(blackJackDeck);
+        Dealer dealer = new Dealer(blackJackDeck);
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Let's play Black Jack");
-        Card userCard1 = blackJackDeck.drawRandomCard();
-        Card userCard2 = blackJackDeck.drawRandomCard();
-        int userCard1Value = userCard1.getFaceValue();
-        int userCard2Value = userCard2.getFaceValue();
 
-        player.addToPlayerCards(userCard1);
-        player.increasePlayerHandTotal(userCard1Value);
-        player.addToPlayerCards(userCard2);
-        player.increasePlayerHandTotal(userCard2Value);
+        for (int i = 0; i < player.getPlayerCards().size(); i++) {
+            System.out.println("Card: "  + player.getPlayerCards().get(i).getRankName() + " of " + player.getPlayerCards().get(i).getSuit());
 
-        Card dealerCard1 = blackJackDeck.drawRandomCard();
-        int dealerCard1Value = dealerCard1.getFaceValue();
-        Card dealerCard2 = blackJackDeck.drawRandomCard();
-        int dealerCard2Value = dealerCard2.getFaceValue();
+        }
+        System.out.println("Your hand totals " + player.getPlayerHandTotal());
+        System.out.println("The dealers visible card is: " + dealer.getDealerCards().get(0).getRankName() + " of " + dealer.getDealerCards().get(0).getSuit());
 
-        dealer.addToDealerCards(dealerCard1);
-        dealer.increaseDealerHandTotal(dealerCard1Value);
-        dealer.addToDealerCards(dealerCard2);
-        dealer.increaseDealerHandTotal(dealerCard2Value);
-
-        System.out.println("Your first card is: " + userCard1.getRankName() + " of " + userCard1.getSuit());
-        System.out.println("Your second card is: " + userCard2.getRankName() + " of " + userCard2.getSuit());
-        System.out.println("Your hand totals: " + player.getPlayerHandTotal());
-        System.out.println("The dealers card is: " + dealerCard1.getRankName() + " of " + dealerCard1.getSuit());
-
+//    
         System.out.println("Would you like to hit or stand?");
         String userHitOrStand = scanner.nextLine();
 
