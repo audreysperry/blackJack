@@ -8,9 +8,12 @@ public class Player {
     private ArrayList<Card> playerCards = new ArrayList<Card>();
     private int aceCount;
     private boolean hasBlackJack;
-    private double cashOnHand = 100;
+    private boolean playerWon;
+    private int cashOnHand = 100;
 
-    public Player(Deck deck) {
+
+    public void newGame(Deck deck) {
+        playerCards.clear();
         Card card1 = deck.drawRandomCard();
         Card card2 = deck.drawRandomCard();
         int card1value = card1.getFaceValue();
@@ -35,11 +38,14 @@ public class Player {
         }
     }
 
+    public void increaseCash() {
+        cashOnHand = cashOnHand + 15;
+    }
     public void reduceCash() {
         cashOnHand = cashOnHand - 10;
     }
 
-    public double getCashOnHand() {
+    public int getCashOnHand() {
         return cashOnHand;
     }
     public int getPlayerHandTotal() {
@@ -76,6 +82,12 @@ public class Player {
         return aceCount;
     }
 
+    public boolean checkIfPlayerHasBlackJack(){
+        if (playerHandTotal ==21) {
+            return true;
+        }
+        return false;
+    }
     public boolean playerHasBlackJack() {
         return hasBlackJack;
     }
@@ -84,7 +96,6 @@ public class Player {
         Card newCard = deck.drawRandomCard();
         playerCards.add(newCard);
         int cardValue = newCard.getFaceValue();
-        System.out.println(cardValue);
         if (cardValue == 11) {
             aceCount++;
         }
@@ -92,24 +103,7 @@ public class Player {
         if (this.getPlayerHandTotal() > 21 && aceCount > 0) {
             this.playerHandTotal -= 10;
             aceCount--;
-            this.showPlayerCards();
-            System.out.println("Your hand totals " + this.getPlayerHandTotal());
-            System.out.println("Would you like to hit or stand?");
-        } else if (this.getPlayerHandTotal() > 21) {
-            this.showPlayerCards();
-            System.out.println("Your hand totaled " + this.getPlayerHandTotal());
-            System.out.println("Sorry you lose");
 
-        } else if (this.getPlayerHandTotal() < 21) {
-            this.showPlayerCards();
-            System.out.println("Your hand totals " + this.getPlayerHandTotal());
-            System.out.println("Would you like to hit or stand?");
-        } else if (this.getPlayerHandTotal() == 21) {
-            System.out.println("You win! ");
-            this.showPlayerCards();
-            System.out.println("Your hand totals: " + this.getPlayerHandTotal());
-        } else {
-            System.out.println("Game error");
         }
     }
 
@@ -119,5 +113,21 @@ public class Player {
         } else {
             return false;
         }
+    }
+
+    public boolean getplayerWon() {
+        return playerWon;
+    }
+
+    public void win() {
+        System.out.println("You hit blackjack!");
+        System.out.println("Your hand totaled " + playerHandTotal);
+        cashOnHand = cashOnHand + 15; 
+
+    }
+
+    public void lose() {
+        System.out.println("Sorry you busted.");
+        System.out.println("Your hand totaled " + playerHandTotal);
     }
 }

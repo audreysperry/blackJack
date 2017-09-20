@@ -8,7 +8,7 @@ public class Dealer {
     private int aceCount;
 
 
-    public Dealer(Deck deck) {
+    public void newGame(Deck deck) {
         Card card1 = deck.drawRandomCard();
         Card card2= deck.drawRandomCard();
         int card1value = card1.getFaceValue();
@@ -23,7 +23,6 @@ public class Dealer {
             }
 
         }
-
     }
     public int getDealerHandTotal() {
         return dealerHandTotal;
@@ -65,11 +64,17 @@ public class Dealer {
     public void checkWinner(Player player) {
         if (player.getPlayerHandTotal() > this.getDealerHandTotal()) {
             System.out.println("The player wins!");
+            player.increaseCash();
 
         } else if (this.getDealerHandTotal() > 21){
             System.out.println("The dealer busted. You win.");
+            player.increaseCash();
         } else if (player.getPlayerHandTotal() < this.getDealerHandTotal() && this.getDealerHandTotal() < 21) {
             System.out.println(" The dealer won.");
+        } else if (this.getDealerHandTotal() == player.getPlayerHandTotal()){
+            System.out.println("You tied.");
+        } else if (this.getDealerHandTotal() == 21){
+            System.out.println("The dealer hit blackjack. Sorry you lose");
         } else {
             System.out.println("Game error");
         }
